@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Georama } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const georama = Georama({
+  variable: "--font-georama",
   subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -19,7 +15,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Padose Brand Engine",
     description: "Turn any homemade product into a professional brand in 30 seconds",
-    url: "https://brand.padose.com",
+    url: "https://padose.com/brand",
     siteName: "Padose",
   },
 };
@@ -30,29 +26,79 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans bg-amber-50/30">
-        <header className="border-b border-amber-200/50 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
-          <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-            <a href="/" className="font-bold text-xl text-amber-900 tracking-tight">
-              Padose <span className="text-amber-600 font-normal text-sm">Brand Engine</span>
+    <html lang="en" className={`${georama.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col" style={{ fontFamily: "var(--font-georama), Inter, sans-serif" }}>
+        {/* Header — matches Padose main site */}
+        <header
+          className="sticky top-0 z-50 border-b"
+          style={{
+            background: "rgba(255,255,255,0.95)",
+            backdropFilter: "blur(12px)",
+            borderColor: "rgba(0,0,0,0.08)",
+          }}
+        >
+          <div className="max-w-[1280px] mx-auto px-6 py-3.5 flex items-center justify-between">
+            <a href="/brand" className="flex items-center gap-2">
+              <span className="font-bold text-xl" style={{ color: "var(--primary)" }}>
+                padose
+              </span>
+              <span
+                className="text-xs font-semibold px-2.5 py-1 rounded-full"
+                style={{
+                  background: "rgba(0,31,96,0.08)",
+                  color: "var(--primary)",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                Brand Engine
+              </span>
             </a>
-            <nav className="hidden sm:flex gap-6 text-sm text-amber-800">
-              <a href="/pricing" className="hover:text-amber-600">Pricing</a>
-              <a href="/gallery" className="hover:text-amber-600">Gallery</a>
-              <a href="/create" className="bg-amber-600 text-white px-4 py-1.5 rounded-full hover:bg-amber-700 transition">
+            <nav className="hidden sm:flex items-center gap-8">
+              <a
+                href="https://padose.com"
+                className="text-sm font-medium hover:opacity-70 transition"
+                style={{ color: "var(--gray-600)" }}
+              >
+                Home
+              </a>
+              <a
+                href="/brand/create"
+                className="btn-primary text-sm"
+              >
                 Create Brand
               </a>
             </nav>
-            <a href="/create" className="sm:hidden bg-amber-600 text-white px-4 py-1.5 rounded-full text-sm">
+            <a href="/brand/create" className="sm:hidden btn-accent text-sm py-2 px-4">
               Start
             </a>
           </div>
         </header>
+
         <main className="flex-1">{children}</main>
-        <footer className="border-t border-amber-200/50 bg-white/60 py-6 mt-auto">
-          <div className="max-w-5xl mx-auto px-4 text-center text-sm text-amber-700/60">
-            Padose Brand Engine — Helping local sellers build real brands.
+
+        {/* Footer — matches Padose dark footer */}
+        <footer style={{ background: "var(--gray-900)" }} className="mt-auto">
+          <div className="max-w-[1280px] mx-auto px-6 py-12">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div>
+                <span className="font-bold text-lg text-white">padose</span>
+                <span className="text-xs ml-2" style={{ color: "var(--gray-400)" }}>
+                  Brand Engine
+                </span>
+              </div>
+              <div className="flex gap-6 text-sm" style={{ color: "var(--gray-400)" }}>
+                <a href="https://padose.com" className="hover:text-white transition">Home</a>
+                <a href="https://padose.com/for-sellers" className="hover:text-white transition">For Sellers</a>
+                <a href="https://padose.com/privacy-policy" className="hover:text-white transition">Privacy</a>
+                <a href="https://padose.com/terms-and-conditions" className="hover:text-white transition">Terms</a>
+              </div>
+            </div>
+            <div
+              className="mt-8 pt-6 text-center text-sm"
+              style={{ borderTop: "1px solid rgba(255,255,255,0.1)", color: "var(--gray-500)" }}
+            >
+              Helping local sellers build real brands.
+            </div>
           </div>
         </footer>
       </body>
